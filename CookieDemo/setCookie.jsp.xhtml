@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    // Get the name entered in the form
+    String userName = request.getParameter("username");
+
+    if (userName != null && !userName.trim().isEmpty()) {
+        // Create the cookie named "user_name"
+        Cookie userCookie = new Cookie("user_name", userName);
+        
+        // Set cookie lifetime (24 hours in seconds)
+        userCookie.setMaxAge(60 * 60 * 24);
+        
+        // Attach cookie to response header sent to browser
+        response.addCookie(userCookie);
+    }
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Saved</title>
+</head>
+<body>
+    <h2>Cookie Saved Successfully!</h2>
+    <p>Stored Name: <strong><%= userName %></strong></p>
+    
+    <a href="getCookie.jsp">Click here to retrieve the saved cookie</a>
+</body>
+</html>
